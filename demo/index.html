@@ -1,0 +1,922 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="LoayEdais - a simple landing page built with Bootstrap." />
+    <title>LoayEdais | First Real Project</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons (the only icon library used now) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
+    <!-- Your CSS (relative path) -->
+    <link rel="stylesheet" href="CSS/style.css" />
+
+    <style>
+      :root {
+        --brand-gradient: linear-gradient(90deg, #fe702e 0%, #f73861 100%);
+        --brand-color: #fe702e;
+      }
+      html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+
+      /* Header */
+      header { background: var(--brand-gradient); color: #fff; }
+      .navbar .navbar-brand { color: #fff; font-size: 1.5em; font-weight: 600; }
+      .navbar .nav-link { color: rgba(255, 255, 255, 0.75); font-weight: 600; }
+      .navbar .nav-link:hover,
+      .navbar .nav-link:focus,
+      .navbar .nav-link.active { color: #fff; }
+      #mainmenu { justify-content: flex-end; }
+
+      /* Features */
+      .features .icon-square {
+        width: 3rem; height: 3rem;
+        display: inline-flex; align-items: center; justify-content: center;
+        border-radius: 0.75rem;
+      }
+      .features .icon-square i { color: orangered; font-size: 1.5rem; }
+      .call-to-action i { color: orangered; }
+
+      /* Carousel */
+      #myCarousel .carousel-item img { max-height: 300px; object-fit: cover; }
+
+      /* Pricing */
+      .pricing ul > li { line-height: 2; border-bottom: 1px dashed #eee; }
+      .pricing .card-header { background: transparent; border-bottom: 0; }
+      .pricing .pricing-card-title { padding: 1.25rem 0; border-radius: 0.5rem; }
+      .pricing .pricing-card-title.colored { background: var(--brand-gradient); color: #fff; }
+      .pricing .pricing-card-title.colored small { color: rgba(255, 255, 255, 0.8) !important; }
+      .pricing .card:hover { transform: translateY(-4px); transition: transform 0.2s; }
+      .pricing .price { --bs-btn-hover-bg: #f73861; --bs-btn-hover-border-color: #f73861; }
+
+      /* Reviews */
+      .reviewer-image img { width: 80px; height: 80px; object-fit: cover; border-radius: 50%; }
+      .reviewer-name-text { font-size: 1.5em; }
+      .reviews .card { background-color: #f1f1f1; }
+
+      /* Auth, checkout, account */
+      .btn-brand { background: var(--brand-gradient); color: #fff; border: 0; font-weight: 600; }
+      .btn-brand:hover, .btn-brand:focus { color: #fff; filter: brightness(1.08); }
+      .btn-brand:disabled { color: #fff; opacity: 0.7; }
+      .modal .nav-pills .nav-link { color: #555; font-weight: 600; }
+      .modal .nav-pills .nav-link.active { background: var(--brand-gradient); color: #fff; }
+      #cardBrand { min-width: 5.5rem; justify-content: center; font-size: 0.85rem; }
+
+      /* Downloads */
+      .downloads .card { transition: transform 0.2s, box-shadow 0.2s; }
+      .downloads .card:hover { transform: translateY(-4px); box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.12) !important; }
+      .downloads .os-icon { font-size: 3.5rem; color: orangered; line-height: 1; }
+      .downloads .btn-download { --bs-btn-color: #fff; --bs-btn-bg: #f73861; --bs-btn-border-color: #f73861;
+        --bs-btn-hover-bg: #fe702e; --bs-btn-hover-border-color: #fe702e; --bs-btn-hover-color: #fff; }
+
+      /* CTA */
+      .cta-section { background: var(--brand-gradient); color: #fff; }
+
+      /* Dark footer */
+      .footer-dark { background: #1a1a1f; color: rgba(255, 255, 255, 0.65); }
+      .footer-dark a { color: rgba(255, 255, 255, 0.65); transition: color 0.2s; }
+      .footer-dark a:hover,
+      .footer-dark a:focus { color: #fe702e; }
+    </style>
+  </head>
+
+  <body>
+    <header id="home">
+      <div class="container d-flex w-100 p-3 mx-auto flex-column">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+          <div class="container-fluid">
+            <a href="#home" class="navbar-brand">LoayEdais</a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#mainmenu"
+              aria-controls="mainmenu"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainmenu">
+              <div class="navbar-nav align-items-lg-center">
+                <a class="nav-link active" aria-current="page" href="#home">Home</a>
+                <a class="nav-link" href="#features">Features</a>
+                <a class="nav-link" href="#pricing">Pricing</a>
+                <a class="nav-link" href="#reviews">Reviews</a>
+                <a class="nav-link" href="#downloads">Downloads</a>
+                <a class="nav-link" href="#contact">Contact</a>
+              </div>
+              <div id="authArea" class="d-flex align-items-center gap-2 ms-lg-3 mt-2 mt-lg-0"></div>
+            </div>
+          </div>
+        </nav>
+
+        <div class="d-flex flex-column flex-md-row align-items-center py-4">
+          <main class="px-3 w-100">
+            <h1 class="display-4 fw-bold">Cover your page.</h1>
+            <p class="lead mt-3">
+              Cover is a one-page template for building simple and beautiful
+              home pages. Download, edit the text, and add your own fullscreen
+              background photo to make it your own.
+            </p>
+            <p class="lead">
+              <a href="#features" class="btn btn-lg btn-light fw-bold shadow mt-4">Learn more</a>
+            </p>
+          </main>
+
+          <div class="w-100 text-center">
+            <img src="images/1.png" alt="Preview of the LoayEdais project" class="img-fluid" />
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="features" id="features">
+      <div class="container px-4 py-5">
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+          <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light flex-shrink-0 me-3"><i class="bi bi-tag-fill"></i></div>
+            <div>
+              <h2 class="h4">Featured title</h2>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+            </div>
+          </div>
+
+          <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light flex-shrink-0 me-3"><i class="bi bi-gear-fill"></i></div>
+            <div>
+              <h2 class="h4">Featured title</h2>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+            </div>
+          </div>
+
+          <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light flex-shrink-0 me-3"><i class="bi bi-brush-fill"></i></div>
+            <div>
+              <h2 class="h4">Featured title</h2>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+            </div>
+          </div>
+
+          <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light flex-shrink-0 me-3"><i class="bi bi-display-fill"></i></div>
+            <div>
+              <h2 class="h4">Featured title</h2>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+            </div>
+          </div>
+
+          <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light flex-shrink-0 me-3"><i class="bi bi-file-earmark-text-fill"></i></div>
+            <div>
+              <h2 class="h4">Featured title</h2>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+            </div>
+          </div>
+
+          <div class="col d-flex align-items-start">
+            <div class="icon-square bg-light flex-shrink-0 me-3"><i class="bi bi-life-preserver"></i></div>
+            <div>
+              <h2 class="h4">Featured title</h2>
+              <p>Paragraph of text beneath the heading to explain the heading. We'll add onto it with another sentence and probably just keep going until we run out of words.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container"><hr /></div>
+
+      <div class="container py-5">
+        <div class="row justify-content-between align-items-center">
+          <div class="col-md-5 col-sm-11 mb-4 mb-md-0">
+            <img src="images/2.png" alt="Custom jumbotron illustration" class="img-fluid" />
+          </div>
+
+          <div class="col-md-5 col-sm-11 call-to-action">
+            <h2 class="display-5 fw-bold">Custom jumbotron</h2>
+            <p class="fs-4">
+              Using a series of utilities, you can create this jumbotron, just
+              like the one in previous versions of Bootstrap. Check out the
+              examples below for how you can remix and restyle it to your liking.
+            </p>
+            <ul class="list-unstyled">
+              <li class="py-1"><i class="bi bi-check-circle-fill pe-3"></i>List Item 1</li>
+              <li class="py-1"><i class="bi bi-check-circle-fill pe-3"></i>List Item 2</li>
+              <li class="py-1"><i class="bi bi-check-circle-fill pe-3"></i>List Item 3</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container"><hr /></div>
+
+    <section class="gallery container px-4 py-5 text-center" id="gallery">
+      <h2 class="title pb-3">Gallery</h2>
+      <p class="pb-5">
+        Paragraph of text beneath the heading to explain the heading. We'll add
+        onto it with another sentence and probably just keep going until we run
+        out of words.
+      </p>
+
+      <div id="myCarousel" class="carousel slide carousel-dark" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="images/slide1.png" alt="Slide 1" class="d-block w-100" />
+          </div>
+          <div class="carousel-item">
+            <img src="images/slide2.png" alt="Slide 2" class="d-block w-100" />
+          </div>
+          <div class="carousel-item">
+            <img src="images/slide3.png" alt="Slide 3" class="d-block w-100" />
+          </div>
+        </div>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="container px-4 py-5 pricing" id="pricing">
+      <div class="text-center">
+        <h2 class="title pb-3">Pricing</h2>
+        <p class="pb-5">
+          Paragraph of text beneath the heading to explain the heading. We'll
+          add onto it with another sentence and probably just keep going until
+          we run out of words.
+        </p>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-3 text-center">
+        <div class="col">
+          <div class="card h-100 rounded-3 shadow-sm">
+            <div class="card-header"><h3 class="h4 my-0 fw-normal">Free</h3></div>
+            <div class="card-body">
+              <h4 class="card-title pricing-card-title display-6">$0<small class="text-muted fw-light fs-5">/mo</small></h4>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>1 user included</li>
+                <li>Multiple access</li>
+                <li>SMS support</li>
+                <li>24/7 online support</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent py-3">
+              <button type="button" class="w-100 btn btn-lg btn-outline-danger price" data-plan="free">Sign up for free</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 rounded-3 shadow-sm border-danger">
+            <div class="card-header"><h3 class="h4 my-0 fw-normal">Standard</h3></div>
+            <div class="card-body">
+              <h4 class="card-title pricing-card-title colored display-6">$299<small class="text-muted fw-light fs-5">/mo</small></h4>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>5 users included</li>
+                <li>Multiple access</li>
+                <li>SMS support</li>
+                <li>24/7 online support</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent py-3">
+              <button type="button" class="w-100 btn btn-lg btn-danger" data-plan="standard">Get started</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 rounded-3 shadow-sm">
+            <div class="card-header"><h3 class="h4 my-0 fw-normal">Premium</h3></div>
+            <div class="card-body">
+              <h4 class="card-title pricing-card-title display-6">$599<small class="text-muted fw-light fs-5">/mo</small></h4>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>20 users included</li>
+                <li>Multiple access</li>
+                <li>SMS support</li>
+                <li>24/7 online support</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent py-3">
+              <button type="button" class="w-100 btn btn-lg btn-outline-danger price" data-plan="premium">Get started</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 rounded-3 shadow-sm">
+            <div class="card-header"><h3 class="h4 my-0 fw-normal">Enterprise</h3></div>
+            <div class="card-body">
+              <h4 class="card-title pricing-card-title display-6">$999<small class="text-muted fw-light fs-5">/mo</small></h4>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Unlimited users</li>
+                <li>Multiple access</li>
+                <li>SMS support</li>
+                <li>24/7 online support</li>
+              </ul>
+            </div>
+            <div class="card-footer bg-transparent py-3">
+              <button type="button" class="w-100 btn btn-lg btn-outline-danger price" data-plan="enterprise">Get started</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container"><hr /></div>
+
+    <section class="reviews container px-4 py-5" id="reviews">
+      <h2 class="title pb-4 text-center">What people say</h2>
+      <div class="row g-3">
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex align-items-center gap-3 mt-3">
+                <div class="reviewer-image"><img src="images/face.png" alt="Loay Edais" /></div>
+                <div>
+                  <h3 class="reviewer-name-text mb-0">Loay Edais</h3>
+                  <small>Web Developer</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex align-items-center gap-3 mt-3">
+                <div class="reviewer-image"><img src="images/face.png" alt="Loay Edais" /></div>
+                <div>
+                  <h3 class="reviewer-name-text mb-0">Loay Edais</h3>
+                  <small>Web Developer</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column justify-content-between">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              <div class="d-flex align-items-center gap-3 mt-3">
+                <div class="reviewer-image"><img src="images/face.png" alt="Loay Edais" /></div>
+                <div>
+                  <h3 class="reviewer-name-text mb-0">Loay Edais</h3>
+                  <small>Web Developer</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="downloads container px-4 py-5" id="downloads">
+      <div class="text-center">
+        <h2 class="title pb-3">Downloads</h2>
+        <p class="pb-5">Pick the version for your operating system. All versions include the same features.</p>
+      </div>
+
+      <div class="row row-cols-1 row-cols-md-3 g-4 text-center">
+        <div class="col">
+          <div class="card h-100 shadow-sm rounded-3">
+            <div class="card-body p-4">
+              <div class="os-icon mb-3"><i class="bi bi-apple"></i></div>
+              <h3 class="h4">macOS</h3>
+              <p class="text-muted mb-1">Version 1.0.0 &middot; .dmg</p>
+              <p class="small text-muted">Requires macOS 12 or later</p>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-4">
+              <a href="#" class="btn btn-download btn-lg w-100" data-os="mac" data-file=""><i class="bi bi-download me-2"></i>Download for Mac</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 shadow-sm rounded-3">
+            <div class="card-body p-4">
+              <div class="os-icon mb-3"><i class="bi bi-windows"></i></div>
+              <h3 class="h4">Windows</h3>
+              <p class="text-muted mb-1">Version 1.0.0 &middot; .exe</p>
+              <p class="small text-muted">Requires Windows 10 or later</p>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-4">
+              <a href="#" class="btn btn-download btn-lg w-100" data-os="windows" data-file=""><i class="bi bi-download me-2"></i>Download for Windows</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="card h-100 shadow-sm rounded-3">
+            <div class="card-body p-4">
+              <div class="os-icon mb-3"><i class="bi bi-terminal-fill"></i></div>
+              <h3 class="h4">Linux</h3>
+              <p class="text-muted mb-1">Version 1.0.0 &middot; .deb / .AppImage</p>
+              <p class="small text-muted">Ubuntu 20.04 or later, and most distros</p>
+            </div>
+            <div class="card-footer bg-transparent border-0 pb-4">
+              <a href="#" class="btn btn-download btn-lg w-100" data-os="linux" data-file=""><i class="bi bi-download me-2"></i>Download for Linux</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact / call to action (replaces the leftover ".col-lg-4" placeholder) -->
+    <section class="cta-section py-5 text-center" id="contact">
+      <div class="container px-4">
+        <h2 class="display-6 fw-bold">Ready to get started?</h2>
+        <p class="lead mb-4">Create your free account today, or get in touch and we'll help you pick the right plan.</p>
+        <button type="button" class="btn btn-light btn-lg fw-bold me-2" data-act="register" data-guest-only>Create free account</button>
+        <a href="#pricing" class="btn btn-outline-light btn-lg me-2">See pricing</a>
+        <a href="mailto:hello@example.com" class="btn btn-outline-light btn-lg">Email us</a>
+      </div>
+    </section>
+
+    <footer class="footer-dark">
+      <div class="container">
+        <div class="d-flex flex-wrap justify-content-between align-items-center py-4">
+          <div class="col-md-4 d-flex align-items-center">
+            <a href="#home" class="mb-3 me-2 mb-md-0 text-decoration-none lh-1" aria-label="Back to top">
+              <i class="bi bi-bootstrap fs-3"></i>
+            </a>
+            <span>&copy; <span id="year">2026</span> LoayEdais</span>
+          </div>
+
+          <ul class="nav col-md-4 justify-content-end list-unstyled d-flex mb-0">
+            <li class="ms-3"><a href="#" aria-label="X (Twitter)"><i class="bi bi-twitter-x fs-4"></i></a></li>
+            <li class="ms-3"><a href="#" aria-label="Instagram"><i class="bi bi-instagram fs-4"></i></a></li>
+            <li class="ms-3"><a href="#" aria-label="Facebook"><i class="bi bi-facebook fs-4"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============ Auth modal ============ -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h2 class="modal-title h4" id="authTitle">Welcome back</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pt-0">
+            <ul class="nav nav-pills nav-fill mb-3" id="authTabs">
+              <li class="nav-item"><button type="button" class="nav-link active" data-setmode="login">Log in</button></li>
+              <li class="nav-item"><button type="button" class="nav-link" data-setmode="register">Sign up</button></li>
+            </ul>
+
+            <form id="authForm" novalidate>
+              <div class="mb-3" data-modes="register">
+                <label class="form-label" for="authName">Full name</label>
+                <input type="text" class="form-control" id="authName" name="name" autocomplete="name" required />
+                <div class="invalid-feedback">Enter your name.</div>
+              </div>
+
+              <div class="mb-3" data-modes="login register reset">
+                <label class="form-label" for="authEmail">Email</label>
+                <input type="email" class="form-control" id="authEmail" name="email" autocomplete="email" required />
+                <div class="invalid-feedback">Enter a valid email address.</div>
+              </div>
+
+              <div class="mb-3" data-modes="login register">
+                <label class="form-label" for="authPassword">Password</label>
+                <div class="input-group has-validation">
+                  <input type="password" class="form-control" id="authPassword" name="password" required />
+                  <button type="button" class="btn btn-outline-secondary toggle-pw" aria-label="Show or hide password"><i class="bi bi-eye"></i></button>
+                  <div class="invalid-feedback">Use at least 8 characters.</div>
+                </div>
+              </div>
+
+              <div class="mb-3" data-modes="register">
+                <label class="form-label" for="authConfirm">Confirm password</label>
+                <input type="password" class="form-control" id="authConfirm" name="confirm" autocomplete="new-password" required />
+                <div class="invalid-feedback">Passwords must match.</div>
+              </div>
+
+              <div class="form-check mb-3" data-modes="register">
+                <input class="form-check-input" type="checkbox" id="authTerms" name="terms" required />
+                <label class="form-check-label" for="authTerms">I agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</label>
+                <div class="invalid-feedback">Please accept to continue.</div>
+              </div>
+
+              <div class="alert alert-danger d-none" id="authError" role="alert"></div>
+              <div class="alert alert-success d-none" id="authOk" role="status"></div>
+
+              <button type="submit" class="btn btn-brand btn-lg w-100" id="authSubmit">Log in</button>
+
+              <p class="text-center small mt-3 mb-0" data-modes="login">
+                <a href="#" data-setmode="reset">Forgot your password?</a>
+              </p>
+              <p class="text-center small mt-3 mb-0" data-modes="reset">
+                <a href="#" data-setmode="login">Back to log in</a>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Checkout modal ============ -->
+    <div class="modal fade" id="checkoutModal" tabindex="-1" aria-labelledby="coTitle" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h2 class="modal-title h4" id="coTitle">Checkout</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pt-0">
+            <div id="coFormView">
+              <form id="checkoutForm" novalidate>
+                <div class="row g-4">
+                  <div class="col-md-7">
+                    <fieldset class="mb-3">
+                      <legend class="h6">Billing cycle</legend>
+                      <div class="btn-group w-100" role="group" aria-label="Billing cycle">
+                        <input type="radio" class="btn-check" name="cycle" id="cycleMonthly" value="monthly" checked />
+                        <label class="btn btn-outline-danger" for="cycleMonthly">Monthly<br /><small id="optMonthly"></small></label>
+                        <input type="radio" class="btn-check" name="cycle" id="cycleYearly" value="yearly" />
+                        <label class="btn btn-outline-danger" for="cycleYearly">Yearly <span class="badge bg-success">-20%</span><br /><small id="optYearly"></small></label>
+                      </div>
+                    </fieldset>
+
+                    <div class="mb-3">
+                      <label class="form-label" for="cardName">Name on card</label>
+                      <input type="text" class="form-control" id="cardName" name="cardName" autocomplete="cc-name" required />
+                      <div class="invalid-feedback">Enter the name on your card.</div>
+                    </div>
+
+                    <div class="mb-3">
+                      <label class="form-label" for="cardNumber">Card number</label>
+                      <div class="input-group has-validation">
+                        <input type="text" class="form-control" id="cardNumber" name="cardNumber" inputmode="numeric" autocomplete="cc-number" placeholder="1234 5678 9012 3456" maxlength="23" required />
+                        <span class="input-group-text" id="cardBrand"><i class="bi bi-credit-card"></i></span>
+                        <div class="invalid-feedback">Enter a valid card number.</div>
+                      </div>
+                    </div>
+
+                    <div class="row g-3">
+                      <div class="col-6">
+                        <label class="form-label" for="cardExpiry">Expiry</label>
+                        <input type="text" class="form-control" id="cardExpiry" name="expiry" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required />
+                        <div class="invalid-feedback">Enter a valid future date.</div>
+                      </div>
+                      <div class="col-6">
+                        <label class="form-label" for="cardCvc">CVC</label>
+                        <input type="text" class="form-control" id="cardCvc" name="cvc" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4" required />
+                        <div class="invalid-feedback">Enter the security code.</div>
+                      </div>
+                    </div>
+
+                    <div class="form-check mt-3">
+                      <input class="form-check-input" type="checkbox" id="coTerms" required />
+                      <label class="form-check-label" for="coTerms">I agree to the <a href="#">Terms</a> and <a href="#">Refund Policy</a>.</label>
+                      <div class="invalid-feedback">Please accept to continue.</div>
+                    </div>
+
+                    <div class="alert alert-danger d-none mt-3 mb-0" id="coError" role="alert"></div>
+                  </div>
+
+                  <div class="col-md-5">
+                    <div class="card bg-light border-0 h-100">
+                      <div class="card-body d-flex flex-column">
+                        <h3 class="h6">Order summary</h3>
+                        <div class="d-flex justify-content-between mt-2"><span id="sumPlan"></span><strong id="sumTotal"></strong></div>
+                        <small class="text-muted" id="sumCycle"></small>
+                        <hr />
+                        <button type="submit" class="btn btn-brand btn-lg w-100 mt-auto" id="payBtn">Pay</button>
+                        <p class="small text-muted mt-3 mb-0">
+                          <i class="bi bi-shield-lock-fill me-1"></i>Demo checkout. Test cards:
+                          <code>4242 4242 4242 4242</code> works, <code>4000 0000 0000 0002</code> is declined.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div id="coDone" class="text-center py-4 d-none">
+              <i class="bi bi-check-circle-fill text-success display-3"></i>
+              <h3 class="h4 mt-3">Payment successful</h3>
+              <p class="text-muted" id="coDoneText"></p>
+              <button type="button" class="btn btn-brand me-2" data-bs-dismiss="modal">Done</button>
+              <a href="#downloads" class="btn btn-outline-danger" data-bs-dismiss="modal">Go to downloads</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ Account modal ============ -->
+    <div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <h2 class="modal-title h4" id="accTitle">My account</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body pt-0" id="accBody"></div>
+          <div class="modal-footer border-0">
+            <button type="button" class="btn btn-outline-danger me-auto d-none" id="cancelPlan">Cancel plan</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3" id="toasts"></div>
+
+    <!-- Bootstrap JS at the end of body -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+
+    <script>
+  
+      (() => {
+        "use strict";
+        const $ = (s, r = document) => r.querySelector(s);
+        const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+        const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+        const money = (n) => "$" + n.toLocaleString("en-US", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 });
+        const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+        const mem = {};
+        const store = {
+          get(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch { return k in mem ? mem[k] : d; } },
+          set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch { mem[k] = v; } },
+        };
+
+        const PLANS = {
+          free: { name: "Free", price: 0 },
+          standard: { name: "Standard", price: 299 },
+          premium: { name: "Premium", price: 599 },
+          enterprise: { name: "Enterprise", price: 999 },
+        };
+        const YEARLY_DISCOUNT = 0.2;
+        const planTotal = (plan, cycle) => (cycle === "yearly" ? PLANS[plan].price * 12 * (1 - YEARLY_DISCOUNT) : PLANS[plan].price);
+
+        /* ---------- Fake backend (swap for fetch calls) ---------- */
+        const hash = (s) => { let h = 5381; for (const c of s) h = ((h << 5) + h + c.charCodeAt(0)) | 0; return String(h); }; // NOT secure, demo only
+        const pub = (u) => u && { id: u.id, name: u.name, email: u.email, plan: u.plan, created: u.created };
+        const api = {
+          users: () => store.get("users", []),
+          current() { return this.users().find((u) => u.id === store.get("session", null)); },
+          async me() { return pub(this.current()); },
+          async register({ name, email, password }) {
+            await wait(500);
+            const users = this.users(); email = email.trim().toLowerCase();
+            if (users.some((u) => u.email === email)) throw new Error("An account with this email already exists.");
+            const u = { id: Date.now().toString(36), name: name.trim(), email, pw: hash(password), plan: "free", created: new Date().toISOString(), orders: [] };
+            users.push(u); store.set("users", users); store.set("session", u.id);
+            return pub(u);
+          },
+          async login({ email, password }) {
+            await wait(500);
+            const u = this.users().find((x) => x.email === email.trim().toLowerCase() && x.pw === hash(password));
+            if (!u) throw new Error("Wrong email or password.");
+            store.set("session", u.id);
+            return pub(u);
+          },
+          async logout() { store.set("session", null); },
+          async reset() { await wait(600); },
+          async orders() { return (this.current() || {}).orders || []; },
+          async checkout({ plan, cycle, last4 }) {
+            await wait(1400);
+            if (last4 === "0002") throw new Error("Your card was declined. Try a different card.");
+            const users = this.users(); const u = users.find((x) => x.id === store.get("session", null));
+            const order = { id: "LE-" + Math.random().toString(36).slice(2, 8).toUpperCase(), plan, cycle, total: planTotal(plan, cycle), last4, date: new Date().toISOString() };
+            u.plan = plan; u.orders.unshift(order); store.set("users", users);
+            return { user: pub(u), order };
+          },
+          async setPlan(plan) {
+            const users = this.users(); const u = users.find((x) => x.id === store.get("session", null));
+            u.plan = plan; store.set("users", users); return pub(u);
+          },
+        };
+
+        /* ---------- UI helpers ---------- */
+        let user = null, pending = null;
+        const M = (id) => bootstrap.Modal.getOrCreateInstance($("#" + id));
+        function openModal(id) {
+          const open = $(".modal.show");
+          if (open && open.id !== id) { open.addEventListener("hidden.bs.modal", () => M(id).show(), { once: true }); M(open.id).hide(); }
+          else M(id).show();
+        }
+        function toast(msg, type = "dark") {
+          const el = document.createElement("div");
+          el.className = "toast align-items-center border-0 text-bg-" + type;
+          el.setAttribute("role", "status");
+          el.innerHTML = '<div class="d-flex"><div class="toast-body">' + esc(msg) + '</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button></div>';
+          $("#toasts").append(el);
+          el.addEventListener("hidden.bs.toast", () => el.remove());
+          new bootstrap.Toast(el, { delay: 4000 }).show();
+        }
+        function busy(btn, on, label) {
+          if (on) { btn.dataset.html = btn.innerHTML; btn.disabled = true; btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>' + label; }
+          else { btn.disabled = false; btn.innerHTML = btn.dataset.html; }
+        }
+
+        /* ---------- Render navbar, pricing buttons, guest-only items ---------- */
+        function render() {
+          $("#authArea").innerHTML = user
+            ? '<div class="dropdown"><button class="btn btn-light fw-semibold dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-person-circle me-1"></i>' + esc(user.name.split(" ")[0]) + ' <span class="badge bg-danger ms-1">' + PLANS[user.plan].name + '</span></button>' +
+              '<ul class="dropdown-menu dropdown-menu-end"><li><button class="dropdown-item" data-act="account">My account</button></li><li><a class="dropdown-item" href="#pricing">Change plan</a></li><li><hr class="dropdown-divider" /></li><li><button class="dropdown-item" data-act="logout">Log out</button></li></ul></div>'
+            : '<button class="btn btn-outline-light" data-act="login">Log in</button><button class="btn btn-light fw-semibold" data-act="register">Sign up</button>';
+          $$("[data-plan]").forEach((b) => {
+            b.dataset.orig = b.dataset.orig || b.innerHTML;
+            const current = user && user.plan === b.dataset.plan;
+            b.disabled = !!current;
+            b.innerHTML = current ? "Current plan" : b.dataset.orig;
+          });
+          $$("[data-guest-only]").forEach((el) => el.classList.toggle("d-none", !!user));
+        }
+
+        /* ---------- Auth ---------- */
+        const authForm = $("#authForm"), authErr = $("#authError"), authOk = $("#authOk");
+        const MODES = { login: ["Welcome back", "Log in"], register: ["Create your account", "Create account"], reset: ["Reset your password", "Send reset link"] };
+        let mode = "login";
+        function setMode(m) {
+          mode = m;
+          authForm.classList.remove("was-validated"); authErr.classList.add("d-none"); authOk.classList.add("d-none");
+          $("#authTitle").textContent = MODES[m][0]; $("#authSubmit").textContent = MODES[m][1];
+          $$("[data-modes]", authForm).forEach((el) => {
+            const on = el.dataset.modes.split(" ").includes(m);
+            el.classList.toggle("d-none", !on);
+            $$("input", el).forEach((i) => (i.disabled = !on));
+          });
+          $$("#authTabs [data-setmode]").forEach((b) => b.classList.toggle("active", b.dataset.setmode === m));
+          $("#authTabs").classList.toggle("d-none", m === "reset");
+          authForm.elements.password.autocomplete = m === "login" ? "current-password" : "new-password";
+        }
+        function openAuth(m, after) { pending = after || null; setMode(m); openModal("authModal"); }
+        function syncAuthValidity() {
+          const f = authForm.elements;
+          f.password.setCustomValidity(mode === "register" && f.password.value.length < 8 ? "Use at least 8 characters." : "");
+          f.confirm.setCustomValidity(f.confirm.value !== f.password.value ? "Passwords must match." : "");
+        }
+        authForm.addEventListener("input", syncAuthValidity);
+        authForm.addEventListener("submit", async (e) => {
+          e.preventDefault();
+          authErr.classList.add("d-none"); authOk.classList.add("d-none");
+          syncAuthValidity();
+          if (!authForm.checkValidity()) { authForm.classList.add("was-validated"); return; }
+          const btn = $("#authSubmit"), d = Object.fromEntries(new FormData(authForm));
+          busy(btn, true, "Please wait…");
+          try {
+            if (mode === "reset") {
+              await api.reset(d.email);
+              authOk.textContent = "If an account exists for that email, a reset link is on its way.";
+              authOk.classList.remove("d-none");
+              return;
+            }
+            user = mode === "login" ? await api.login(d) : await api.register(d);
+            render();
+            toast(mode === "login" ? "Welcome back, " + user.name.split(" ")[0] + "!" : "Account created. Welcome!", "success");
+            const go = pending; pending = null;
+            $("#authModal").addEventListener("hidden.bs.modal", () => go && go(), { once: true });
+            M("authModal").hide();
+          } catch (ex) {
+            authErr.textContent = ex.message; authErr.classList.remove("d-none");
+          } finally { busy(btn, false); }
+        });
+        $("#authModal").addEventListener("hide.bs.modal", () => { if (!user) pending = null; });
+        $("#authModal").addEventListener("hidden.bs.modal", () => { authForm.reset(); authForm.classList.remove("was-validated"); });
+
+        async function logout() { await api.logout(); user = null; render(); toast("You've been logged out."); }
+
+        /* ---------- Checkout ---------- */
+        const co = { plan: null, cycle: "monthly" }, cf = $("#checkoutForm"), f = cf.elements;
+        const brandOf = (d) => (/^4/.test(d) ? "Visa" : /^(5[1-5]|2[2-7])/.test(d) ? "Mastercard" : /^3[47]/.test(d) ? "Amex" : "");
+        const luhn = (d) => { let s = 0, alt = false; for (let i = d.length - 1; i >= 0; i--) { let n = +d[i]; if (alt) { n *= 2; if (n > 9) n -= 9; } s += n; alt = !alt; } return s % 10 === 0; };
+        function validateCard() {
+          const d = f.cardNumber.value.replace(/\D/g, "");
+          f.cardNumber.setCustomValidity(d.length >= 13 && luhn(d) ? "" : "Enter a valid card number.");
+          const m = /^(\d{2})\/(\d{2})$/.exec(f.expiry.value); let ok = false;
+          if (m) { const mm = +m[1], yy = 2000 + +m[2], now = new Date(); ok = mm >= 1 && mm <= 12 && (yy > now.getFullYear() || (yy === now.getFullYear() && mm >= now.getMonth() + 1)); }
+          f.expiry.setCustomValidity(ok ? "" : "Enter a valid future date.");
+          const need = brandOf(d) === "Amex" ? 4 : 3;
+          f.cvc.setCustomValidity(new RegExp("^\\d{" + need + "}$").test(f.cvc.value) ? "" : "Enter the security code.");
+        }
+        f.cardNumber.addEventListener("input", () => {
+          const d = f.cardNumber.value.replace(/\D/g, "").slice(0, 19);
+          f.cardNumber.value = d.replace(/(.{4})/g, "$1 ").trim();
+          const b = brandOf(d);
+          $("#cardBrand").innerHTML = b ? "<strong>" + b + "</strong>" : '<i class="bi bi-credit-card"></i>';
+          validateCard();
+        });
+        f.expiry.addEventListener("input", () => {
+          let v = f.expiry.value.replace(/\D/g, "").slice(0, 4);
+          if (v.length > 2) v = v.slice(0, 2) + "/" + v.slice(2);
+          f.expiry.value = v; validateCard();
+        });
+        f.cvc.addEventListener("input", () => { f.cvc.value = f.cvc.value.replace(/\D/g, "").slice(0, 4); validateCard(); });
+        cf.addEventListener("change", (e) => { if (e.target.name === "cycle") { co.cycle = e.target.value; updateSummary(); } });
+
+        function updateSummary() {
+          const p = PLANS[co.plan], t = planTotal(co.plan, co.cycle);
+          $("#optMonthly").textContent = money(p.price) + "/mo";
+          $("#optYearly").textContent = money(planTotal(co.plan, "yearly")) + "/yr";
+          $("#sumPlan").textContent = p.name + " plan";
+          $("#sumCycle").textContent = co.cycle === "yearly" ? "Billed yearly (20% off)" : "Billed monthly";
+          $("#sumTotal").textContent = money(t) + (co.cycle === "yearly" ? "/yr" : "/mo");
+          $("#payBtn").innerHTML = '<i class="bi bi-lock-fill me-2"></i>Pay ' + money(t);
+        }
+        function openCheckout(plan) {
+          if (plan === "free") return user ? toast("You're already on the Free plan.") : openAuth("register");
+          if (!user) return openAuth("register", () => openCheckout(plan));
+          if (user.plan === plan) return toast("You're already on the " + PLANS[plan].name + " plan.");
+          co.plan = plan; co.cycle = "monthly";
+          cf.reset(); cf.classList.remove("was-validated"); $("#coError").classList.add("d-none");
+          $("#cardBrand").innerHTML = '<i class="bi bi-credit-card"></i>';
+          $("#coFormView").classList.remove("d-none"); $("#coDone").classList.add("d-none");
+          f.cardName.value = user.name; updateSummary(); openModal("checkoutModal");
+        }
+        cf.addEventListener("submit", async (e) => {
+          e.preventDefault(); validateCard();
+          if (!cf.checkValidity()) { cf.classList.add("was-validated"); return; }
+          const btn = $("#payBtn"), err = $("#coError"); err.classList.add("d-none");
+          busy(btn, true, "Processing…");
+          try {
+            const r = await api.checkout({ plan: co.plan, cycle: co.cycle, last4: f.cardNumber.value.replace(/\D/g, "").slice(-4) });
+            user = r.user; render();
+            $("#coDoneText").textContent = "Order " + r.order.id + " · " + PLANS[r.order.plan].name + " plan · " + money(r.order.total) + " paid with card ending " + r.order.last4 + ".";
+            $("#coFormView").classList.add("d-none"); $("#coDone").classList.remove("d-none");
+          } catch (ex) { err.textContent = ex.message; err.classList.remove("d-none"); }
+          finally { busy(btn, false); updateSummary(); }
+        });
+
+        /* ---------- Account ---------- */
+        async function openAccount() {
+          const u = await api.me(), orders = await api.orders();
+          const rows = orders.map((o) => "<tr><td>" + esc(o.id) + "</td><td>" + new Date(o.date).toLocaleDateString() + "</td><td>" + PLANS[o.plan].name + "</td><td class=\"text-end\">" + money(o.total) + "</td></tr>").join("");
+          $("#accBody").innerHTML =
+            '<dl class="row mb-3"><dt class="col-4">Name</dt><dd class="col-8">' + esc(u.name) + '</dd><dt class="col-4">Email</dt><dd class="col-8">' + esc(u.email) +
+            '</dd><dt class="col-4">Plan</dt><dd class="col-8"><span class="badge bg-danger">' + PLANS[u.plan].name + '</span></dd><dt class="col-4">Member since</dt><dd class="col-8">' + new Date(u.created).toLocaleDateString() + "</dd></dl>" +
+            '<h3 class="h6">Billing history</h3>' +
+            (orders.length ? '<div class="table-responsive"><table class="table table-sm"><thead><tr><th>Order</th><th>Date</th><th>Plan</th><th class="text-end">Total</th></tr></thead><tbody>' + rows + "</tbody></table></div>" : '<p class="text-muted small">No payments yet.</p>');
+          $("#cancelPlan").classList.toggle("d-none", u.plan === "free");
+          openModal("accountModal");
+        }
+        $("#cancelPlan").addEventListener("click", async () => {
+          if (!confirm("Cancel your plan and switch to Free?")) return;
+          user = await api.setPlan("free"); render(); M("accountModal").hide(); toast("Your plan was changed to Free.");
+        });
+
+        /* ---------- Downloads (login required) ---------- */
+        function download(b) {
+          if (!user) return openAuth("login", () => download(b));
+          const file = b.dataset.file;
+          if (file) { toast("Downloading for " + b.dataset.os + "…", "success"); location.href = file; }
+          else toast("Demo: put your file path in the data-file attribute of this button.", "warning");
+        }
+
+        /* ---------- Global click handling ---------- */
+        document.addEventListener("click", (e) => {
+          const t = e.target;
+          const act = t.closest("[data-act]");
+          if (act) {
+            e.preventDefault();
+            const a = act.dataset.act;
+            if (a === "login" || a === "register") openAuth(a);
+            else if (a === "logout") logout();
+            else if (a === "account") openAccount();
+            return;
+          }
+          const plan = t.closest("[data-plan]"); if (plan) return openCheckout(plan.dataset.plan);
+          const dl = t.closest("[data-os]"); if (dl) { e.preventDefault(); return download(dl); }
+          const sm = t.closest("[data-setmode]"); if (sm) { e.preventDefault(); return setMode(sm.dataset.setmode); }
+          const pw = t.closest(".toggle-pw");
+          if (pw) {
+            const input = pw.parentElement.querySelector("input"), show = input.type === "password";
+            input.type = show ? "text" : "password";
+            pw.firstElementChild.className = "bi " + (show ? "bi-eye-slash" : "bi-eye");
+          }
+        });
+
+        /* ---------- Init ---------- */
+        (async () => { user = await api.me(); setMode("login"); render(); })();
+      })();
+    </script>
+  </body>
+</html>
